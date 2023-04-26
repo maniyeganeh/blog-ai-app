@@ -2,6 +2,7 @@ import './globals.css';
 import { Inter } from 'next/font/google';
 import { Open_Sans } from 'next/font/google';
 import Navbar from 'app/(shared)/Navbar';
+import Footer from 'app/(shared)/Footer';
 const openSans = Open_Sans({
   subsets: ['latin'],
 });
@@ -22,7 +23,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <Navbar />
         {children}
-        {/* <Footer /> */}
+        <Footer />
       </body>
     </html>
   );
