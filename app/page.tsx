@@ -1,5 +1,7 @@
 import Trending from 'app/(home)/Trending';
 import Tech from 'app/(home)/Tech';
+import Travel from 'app/(home)/Travel';
+import Other from 'app/(shared)/Other';
 export default function Home() {
   return (
     <main className="px-10 leading-7 ">
@@ -7,8 +9,8 @@ export default function Home() {
       <div className="md:flex gap-10 mg=b-5">
         <div className="basis-3/4">
           <Tech />
-          {/* <Travel/>
-        <Other/> */}
+          <Travel />
+          <Other />
           <div className="hidden md:block">{/* <Subscribe/> */}</div>
         </div>
         <div className="basis-1/4">{/* <Sidebar/> */}</div>
