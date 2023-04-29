@@ -13,7 +13,13 @@ const TrendingCard = ({ className }: TrendingCardProps) => {
       href="/"
     >
       <div className="z-0 relative w-full h-full bg-wh-500"></div>
-      <div className="absolute z-1 top-0 left-0 h-full w-full bg-gradient-gradiual"></div>
+      <div className="absolute z-1 top-0 left-0 h-full w-full bg-gradient-gradiual" />
+      <div className="absolute z-2 bottom-0 left-0 p-3">
+        <h4 className="inline-block px-5 py-1 font-semibold bg-accent-orange text-wh-900">
+          category
+        </h4>
+        <div className="text-wh-100 mt-2">post title</div>
+      </div>
     </Link>
   );
 };
@@ -32,11 +38,15 @@ const Trending = (props: Props) => {
         </p>
       </div>
       <div className="sm:grid gap-5 grid-cols-4 grid-rows-2 sm:h-[600px] my-3">
-        <div className="col-span-2 row-span-2 bg-wh-500"></div>
-        <div className="col-span-2 row-span-1 bg-wh-500"></div>
-        <div className="col-span-1 row-span-1 bg-wh-500"></div>
-        <div className="col-span-1 row-span-1 bg-wh-500"></div>
+        <TrendingCard className="col-span-2 row-span-2 bg-wh-500" />
+        <TrendingCard className="col-span-2 row-span-1 bg-wh-500" />
+        <TrendingCard className="col-span-1 row-span-1 bg-wh-500" />
+        <TrendingCard className="col-span-1 row-span-1 bg-wh-500" />
       </div>
+      <p className="text-sm ">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis labore
+        repellendus laborum quis, maiores a.
+      </p>
       {/* <div className="flex justify-between gap-3 my-3">
         <div className="basis-1/2 bg-wh-500 h-96"></div>
         <div className="flex flex-col basis-1/2 gap-3  h-96">

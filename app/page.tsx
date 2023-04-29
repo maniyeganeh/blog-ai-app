@@ -1,13 +1,13 @@
 import Trending from 'app/(home)/Trending';
-
+import Tech from 'app/(home)/Tech';
 export default function Home() {
   return (
     <main className="px-10 leading-7 ">
       <Trending />
       <div className="md:flex gap-10 mg=b-5">
         <div className="basis-3/4">
-          {/* <Tech/>
-        <Travel/>
+          <Tech />
+          {/* <Travel/>
         <Other/> */}
           <div className="hidden md:block">{/* <Subscribe/> */}</div>
         </div>
