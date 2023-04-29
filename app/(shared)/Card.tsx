@@ -30,6 +30,17 @@ const Card = ({
             title
           </h4>
         </Link>
+        <div className={`${isSmallCard ? 'my-2' : 'flex my-3'} gap-3`}>
+          <h5 className="font-semibold text-xs">author</h5>
+          <h6 className="text-wh-300 text-xs ">date</h6>
+        </div>
+        <p
+          className={`text-wh-100 ${
+            isLongForm ? 'line-clamp-5' : 'line-clamp-3'
+          }`}
+        >
+          snippet
+        </p>
       </div>
     </div>
   );
