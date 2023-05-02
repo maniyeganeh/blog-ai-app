@@ -2,7 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 import SocialLinks from './SocialLinks';
-
+import Ad1 from 'public/assets/ad-1.jpg';
 const Navbar = () => {
   return (
     <header className="mb-5">
@@ -27,7 +27,14 @@ const Navbar = () => {
           </p>
         </div>
         <div className="basis-full relative w-auto h-32 bg-wh-500">
-          Image Right Here
+          <Image
+            fill
+            style={{ objectFit: 'cover' }}
+            alt="advert-1"
+            placeholder="blur"
+            sizes="(max-width:480px) 100vw , (max-width:760px) 75vw, (max-width:1060px) 50vw, 33vw"
+            src={Ad1}
+          />
         </div>
       </div>
       <hr className="border-1 mx-10 " />
