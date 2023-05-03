@@ -44,6 +44,7 @@ export default async function Home() {
   };
 
   const [trendingPosts, techPosts, travelPosts, otherPosts] = formatPosts();
+  if (!posts) return <h1>Not Found</h1>;
   return (
     <main className="px-10 leading-7 ">
       <Trending trendingPosts={trendingPosts} />
