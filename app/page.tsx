@@ -22,6 +22,7 @@ const getPosts = async () => {
 
 export default async function Home() {
   const posts = await getPosts();
+
   const formatPosts = () => {
     const trendingPosts: Array<Post> = [];
     const techPosts: Array<Post> = [];
@@ -44,7 +45,7 @@ export default async function Home() {
   };
 
   const [trendingPosts, techPosts, travelPosts, otherPosts] = formatPosts();
-  if (!posts) return <h1>Not Found</h1>;
+  if (!formatPosts) return <h1>Not Found</h1>;
   return (
     <main className="px-10 leading-7 ">
       <Trending trendingPosts={trendingPosts} />
