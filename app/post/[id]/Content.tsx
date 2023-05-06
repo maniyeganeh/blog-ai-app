@@ -1,12 +1,12 @@
 'use client';
 import { FormattedPost } from '@/app/types';
 import React, { useState } from 'react';
-import { XMarkIcon, PencilSquareIcon } from '@heroicons/react/24/solid';
 import Image from 'next/image';
 import { useEditor, EditorContent, Editor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import SocialLinks from '@/app/(shared)/SocialLinks';
 import EditorMenubar from './EditorMenubar';
+import CategoryandEdit from './CategoryandEdit';
 type Props = {
   post: FormattedPost;
 };
@@ -15,8 +15,13 @@ const Content = ({ post }: Props) => {
   const [isEditable, setIsEditeable] = useState<boolean>(false);
   const [title, setTitle] = useState<string>(post.title);
   const [titleError, setTitleError] = useState<string>('');
+  const [tempTitle, setTempTitle] = useState<string>(title);
   const [content, setContent] = useState<string>(post.content);
   const [contentError, setContentError] = useState<string>('');
+  const [tempContent, setTempContent] = useState<string>(content);
+  const date = new Date(post?.createdAt);
+  const options = { year: 'numeric', month: 'long', day: 'numeric' } as any;
+  const formattedDate = date.toLocaleDateString('en-us', options);
 
   const handleEnableEdit = (bool: boolean) => {
     setIsEditeable(bool);
@@ -43,27 +48,18 @@ const Content = ({ post }: Props) => {
     <div className="prose w-full max-w-full mb-10">
       <h1>Hello</h1>
       <h5 className="text-wh-300">{`Home >${post.category} > ${post.title}`}</h5>
-      <div className="flex justify-between items-center">
-        <h4 className="bg-accent-orange py-2 px-5 text-wh-900 text-sm font-bold">
-          {post.category}
-        </h4>
-        <div className="mt-4 ">
-          {isEditable ? (
-            <div className="flex justify-between gap-3">
-              <button
-                type="button"
-                onClick={() => handleEnableEdit(!isEditable)}
-              >
-                <XMarkIcon className="h-6 w-6 text-accent-red" />
-              </button>
-            </div>
-          ) : (
-            <button type="button" onClick={() => handleEnableEdit(!isEditable)}>
-              <PencilSquareIcon className="h-6 w-6 text-accent-red" />
-            </button>
-          )}
-        </div>
-      </div>
+      <CategoryandEdit
+        isEditable={isEditable}
+        handleEnableEdit={handleEnableEdit}
+        title={title}
+        setTitle={setTitle}
+        tempTitle={tempTitle}
+        setTempTitle={setTempTitle}
+        tempContent={tempContent}
+        setTempContent={setTempContent}
+        editor={editor}
+        post={post}
+      />
       <form onSubmit={handleSubmit}>
         <>
           {isEditable ? (
@@ -80,7 +76,7 @@ const Content = ({ post }: Props) => {
           )}
           <div className="flex gap-3">
             <h5 className="font-semibold text-xs"> By {post.author}</h5>
-            <h6 className="text-wh-300 text-xs ">{post.createdAt}</h6>
+            <h6 className="text-wh-300 text-xs ">{formattedDate}</h6>
           </div>
         </>
         <div className="relative w-auto mt-2 mb-16 h-96">
