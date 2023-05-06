@@ -3,7 +3,7 @@ import { prisma } from '@/app/api/client';
 import React from 'react';
 import { Post as PostType } from '@prisma/client';
 import { FormattedPost } from '@/app/types';
-import Content from './Content';
+import Content from '@/app/post/[id]/Content';
 type Props = {
   params: { id: string };
 };

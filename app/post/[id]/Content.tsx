@@ -3,7 +3,10 @@ import { FormattedPost } from '@/app/types';
 import React, { useState } from 'react';
 import { XMarkIcon, PencilSquareIcon } from '@heroicons/react/24/solid';
 import Image from 'next/image';
+import { useEditor, EditorContent, Editor } from '@tiptap/react';
+import StarterKit from '@tiptap/starter-kit';
 import SocialLinks from '@/app/(shared)/SocialLinks';
+import EditorMenubar from './EditorMenubar';
 type Props = {
   post: FormattedPost;
 };
@@ -14,6 +17,21 @@ const Content = ({ post }: Props) => {
   const [titleError, setTitleError] = useState<string>('');
   const [content, setContent] = useState<string>(post.content);
   const [contentError, setContentError] = useState<string>('');
+
+  const handleEnableEdit = (bool: boolean) => {
+    setIsEditeable(bool);
+    editor?.setEditable(bool);
+  };
+  const handleOnChangeContent = ({ editor }: any) => {
+    if (!(editor as Editor).isEmpty) setContentError('');
+    setContent((editor as Editor).getHTML());
+  };
+  const editor = useEditor({
+    extensions: [StarterKit],
+    onUpdate: handleOnChangeContent,
+    content: content,
+    editable: isEditable,
+  });
 
   const handleSubmit = () => {};
   return (
@@ -27,12 +45,15 @@ const Content = ({ post }: Props) => {
         <div className="mt-4 ">
           {isEditable ? (
             <div className="flex justify-between gap-3">
-              <button onClick={() => console.log('cancel')}>
+              <button
+                type="button"
+                onClick={() => handleEnableEdit(!isEditable)}
+              >
                 <XMarkIcon className="h-6 w-6 text-accent-red" />
               </button>
             </div>
           ) : (
-            <button onClick={() => console.log('make edit')}>
+            <button type="button" onClick={() => handleEnableEdit(!isEditable)}>
               <PencilSquareIcon className="h-6 w-6 text-accent-red" />
             </button>
           )}
@@ -69,6 +90,21 @@ const Content = ({ post }: Props) => {
           "
             style={{ objectFit: 'cover' }}
           />
+        </div>
+        <div
+          className={
+            isEditable
+              ? 'border-2 rounded-md bg-wh-50 p-3'
+              : 'w-full max-w-full '
+          }
+        >
+          {isEditable && (
+            <>
+              <EditorMenubar editor={editor} />
+              <hr className="border-1 mt-2 mb-5" />
+            </>
+          )}
+          <EditorContent editor={editor} />
         </div>
         {isEditable && (
           <div className="flex justify-end">
