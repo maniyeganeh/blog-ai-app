@@ -22,6 +22,11 @@ const Content = ({ post }: Props) => {
     setIsEditeable(bool);
     editor?.setEditable(bool);
   };
+  const handleOnChangeTitle = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    if (title) setTitleError('');
+    setTitle(e.target.value);
+  };
+
   const handleOnChangeContent = ({ editor }: any) => {
     if (!(editor as Editor).isEmpty) setContentError('');
     setContent((editor as Editor).getHTML());
@@ -66,7 +71,7 @@ const Content = ({ post }: Props) => {
               <textarea
                 className="border-2 rounded-md bg-wh-5- p-3 w-full"
                 placeholder="Title"
-                onChange={(e) => console.log('change', e.target.value)}
+                onChange={handleOnChangeTitle}
                 value={title}
               />
             </div>
