@@ -7,6 +7,7 @@ import StarterKit from '@tiptap/starter-kit';
 import SocialLinks from '@/app/(shared)/SocialLinks';
 import EditorMenubar from './EditorMenubar';
 import CategoryandEdit from './CategoryandEdit';
+import Article from './Article';
 type Props = {
   post: FormattedPost;
 };
@@ -40,6 +41,12 @@ const Content = ({ post }: Props) => {
     extensions: [StarterKit],
     onUpdate: handleOnChangeContent,
     content: content,
+    editorProps: {
+      attributes: {
+        class:
+          'pros prose-sm xl:prose-2xl leading-8 focus:outline-none w-full max-w-full',
+      },
+    },
     editable: isEditable,
   });
 
@@ -92,21 +99,13 @@ const Content = ({ post }: Props) => {
             style={{ objectFit: 'cover' }}
           />
         </div>
-        <div
-          className={
-            isEditable
-              ? 'border-2 rounded-md bg-wh-50 p-3'
-              : 'w-full max-w-full '
-          }
-        >
-          {isEditable && (
-            <>
-              <EditorMenubar editor={editor} />
-              <hr className="border-1 mt-2 mb-5" />
-            </>
-          )}
-          <EditorContent editor={editor} />
-        </div>
+        <Article
+          contentError={contentError}
+          editor={editor}
+          isEditable={isEditable}
+          setContent={setContent}
+          title={title}
+        />
         {isEditable && (
           <div className="flex justify-end">
             <button
